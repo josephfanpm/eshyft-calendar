@@ -1,0 +1,5 @@
+node_modules/
+dist/
+# Original design exports are internal; only screenshots of this recreation are published.
+figma-export/
+.DS_Store
