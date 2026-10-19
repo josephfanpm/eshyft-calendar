@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Ubuntu', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-brand: #3699fa;
+  --color-brand-soft: #e3f0fe;
+  --color-ok: #1fb58f;
+  --color-ok-soft: #e6f7f1;
+  --color-ink: #1f2937;
+  --color-ink-2: #4b5563;
+  --color-ink-3: #9aa1ac;
+  --color-line: #d9dde3;
+  --color-canvas: #f2f3f5;
+  --color-instant: #6d28d9;
+  --color-instant-soft: #efeafe;
+  --color-urgent: #e53935;
+  --color-urgent-soft: #fdecec;
+  --color-lpn: #14b88a;
+  --color-rn: #ef4444;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #e9edf3;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.screen-enter {
+  animation: slide-in 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-enter {
+    animation: none;
+  }
+}
