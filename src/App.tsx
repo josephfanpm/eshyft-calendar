@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { CalendarTab, type Banner } from './CalendarTab';
+import { CalendarTab } from './CalendarTab';
 import { BottomNav, Header, HomeIndicator, ViewTabs, type Tab } from './chrome';
 import { generateShifts, MONTHS_VISIBLE, type Shift, type Slot } from './data';
 import { ShiftDetail } from './ShiftDetail';
@@ -18,7 +18,6 @@ export function App() {
   const [stack, setStack] = useState<Route[]>([{ name: 'tabs' }]);
   const [tab, setTab] = useState<Tab>('calendar');
   const [monthOffset, setMonthOffset] = useState(0);
-  const [banner, setBanner] = useState<Banner>('none');
   const [toast, setToast] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +42,6 @@ export function App() {
     setStack([{ name: 'tabs' }]);
     setTab('calendar');
     setMonthOffset(0);
-    setBanner('none');
   };
 
   let title = 'Find shifts';
@@ -56,10 +54,8 @@ export function App() {
           monthOffset={monthOffset}
           maxOffset={MONTHS_VISIBLE - 1}
           shifts={shifts}
-          banner={banner}
           onMonth={setMonthOffset}
           onDay={(date) => push({ name: 'day', date })}
-          onBanner={() => setToast(banner === 'setup' ? 'Account setup is outside this prototype' : 'License settings are outside this prototype')}
         />
       ) : tab === 'list' ? (
         <ListTab today={today} shifts={shifts} onShift={(id) => push({ name: 'shift', id })} onFilter={() => setToast('Filters are outside this prototype')} />
@@ -123,7 +119,8 @@ export function App() {
           so the question they bring to the app is "what's open on my usual days off?" The calendar answers it at a glance.
         </p>
         <p className="mt-3 text-[15px] leading-relaxed text-ink-2">
-          In testing, nurses with the calendar applied to about 2% more shifts, with no drop in hours worked and no rise in call-outs. It shipped to every nurse.
+          I tested it against the existing list and map, tracking shift applications with hours worked, confirmed shifts and call-outs as counter metrics.
+          The calendar lifted applications without hurting the counter metrics, and it shipped to every nurse.
         </p>
 
         <h3 className="mt-6 text-[14px] font-bold text-ink">Try it</h3>
@@ -133,31 +130,9 @@ export function App() {
           <li>Open a confirmed shift to call out of it, or step to a later month to see how listings thin out.</li>
         </ul>
 
-        <h3 className="mt-6 text-[14px] font-bold text-ink">Account banner states</h3>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {(
-            [
-              ['none', 'None'],
-              ['setup', 'Setup incomplete'],
-              ['state', 'No shifts in state'],
-            ] as const
-          ).map(([value, label]) => (
-            <button
-              key={value}
-              onClick={() => {
-                setBanner(value);
-                setStack([{ name: 'tabs' }]);
-                setTab('calendar');
-              }}
-              className={`rounded-full border px-3 py-1.5 text-[13px] ${banner === value ? 'border-brand bg-brand text-white' : 'border-line bg-white text-ink-2'}`}
-            >
-              {label}
-            </button>
-          ))}
-          <button onClick={reset} className="rounded-full border border-line bg-white px-3 py-1.5 text-[13px] text-ink-2">
-            Reset demo
-          </button>
-        </div>
+        <button onClick={reset} className="mt-6 rounded-full border border-line bg-white px-3 py-1.5 text-[13px] text-ink-2">
+          Reset demo
+        </button>
 
         <p className="mt-6 text-[13px] text-ink-2">
           <a className="font-medium text-brand underline-offset-2 hover:underline" href={`${REPO}/blob/main/docs/CASE_STUDY.md`}>

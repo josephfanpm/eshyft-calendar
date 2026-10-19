@@ -1,6 +1,6 @@
 # Case study: a calendar for booking nursing shifts
 
-I was the product manager for this feature at ESHYFT, a marketplace where nursing homes post per diem shifts and CNAs, LPNs and RNs pick them up. The [interactive prototype](https://josephfanpm.github.io/eshyft-calendar/) in this repo is my own recreation of the shipped design, built for this portfolio. It uses made-up facilities and shift data and leaves out ESHYFT's branding. Results are given as relative changes.
+I was the product manager for this feature at ESHYFT, a marketplace where nursing homes post per diem shifts and CNAs, LPNs and RNs pick them up. The [interactive prototype](https://josephfanpm.github.io/eshyft-calendar/) in this repo is my own recreation of the shipped design, built for this portfolio. It uses made-up facilities and shift data and leaves out ESHYFT's branding.
 
 ## Who it was for
 
@@ -28,7 +28,7 @@ The user stories:
 
 A calendar view in the nurse app. Each day shows whether you already have a shift scheduled and whether open shifts are available. Tapping a day shows that day's open shifts next to your confirmed ones, and you can apply from there.
 
-I worked with design on the Figma screens, and the designs and copy were final in April 2025. Engineering built it in the Flutter nurse app over three sprints, and it shipped in June 2025.
+I worked with design on the Figma screens and finalized the designs and copy with them. Engineering built it in the Flutter nurse app over three sprints.
 
 Loading a month of shifts at once made calendar load time a concern, so we opened a separate backend spike on improving it rather than holding the release.
 
@@ -36,20 +36,25 @@ Loading a month of shifts at once made calendar load time a concern, so we opene
 
 Before rolling the calendar out to everyone, I tested it against the existing list and map with a group of nurses. I also tested a second version that showed each shift's pay rate on the calendar, because pay is a big part of how nurses choose between shifts and I wanted to know whether it belonged on this screen.
 
+What we measured:
+
+- **Primary metric: shift applications per nurse.** The calendar's job is to help nurses find shifts that fit their availability, so more applications is the clearest sign it's working.
+- **Counter metrics: hours worked, confirmed shifts and call-outs.** More applications only matter if they turn into shifts nurses actually work. If the calendar made it easy to apply on impulse, we'd expect applications to rise while confirmations and hours stayed flat, or call-outs to go up. These metrics guarded against that.
+
 ## Impact
 
-The calendar without pay rates won, and we rolled it out to every nurse on the app.
+The calendar made a measurable difference, and we rolled it out to every nurse on the app.
 
-- Nurses who had the calendar applied to about 2% more shifts.
-- Hours worked, confirmed shifts and call-outs held steady, so the extra applications didn't come from nurses booking shifts they later dropped.
-- The version with pay rates did worse than the plain calendar.
+- Nurses with the calendar applied to more shifts than nurses using the list and map.
+- The counter metrics held, so the extra applications turned into real work rather than shifts nurses booked and later dropped.
+- The plain calendar beat the version with pay rates, so we shipped it without them.
 - Nurses got the calendar they had been asking for in feedback, built around how they actually plan: by the days they're free.
 
 ## What I learned
 
 I expected pay rates to help. My working theory is that a rate on every day turns a calendar about availability into a page for comparing prices, and nurses hold out for the best-paying day instead of booking the day they're free. That's a hypothesis, and it's what I'd test next.
 
-A 2% lift on a core action is modest. It was still worth shipping, because nothing else got worse and it fixed one of the most common complaints in our feedback.
+Setting counter metrics before the test made the decision to ship straightforward. A lift in applications was only worth having if it didn't cost us reliability, and because hours, confirmations and call-outs held, we could roll it out with confidence. It also fixed one of the most common complaints in our feedback.
 
 ## What I'd do next
 

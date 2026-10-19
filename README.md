@@ -14,7 +14,7 @@ The nurses picking up per diem shifts are busy. Most have a full-time job, keep 
 
 The app showed shifts in a list and on a map, and neither one lets you see a month at a glance. Nurses had to change date filters and remember their own bookings to find a shift that fit. The calendar shows, for every day, whether day, evening and night shifts are open and which ones you're already booked on.
 
-In testing, nurses with the calendar applied to about 2% more shifts, with no drop in hours worked and no rise in call-outs. It rolled out to every nurse. The [case study](docs/CASE_STUDY.md) covers the problem, the decisions and what I'd do next.
+I tested the calendar against the existing list and map. The primary metric was shift applications, with hours worked, confirmed shifts and call-outs as counter metrics to make sure extra applications weren't coming from nurses booking shifts they'd later drop. The calendar lifted applications without moving the counter metrics the wrong way, and it rolled out to every nurse. The [case study](docs/CASE_STUDY.md) covers the problem, the decisions and what I'd do next.
 
 ## What you can do in the prototype
 
@@ -26,7 +26,7 @@ In testing, nurses with the calendar applied to about 2% more shifts, with no dr
 - Past days are disabled and show no icons. A confirmed shift in the past doesn't mean the nurse worked it, so the calendar only shows what's still ahead.
 - Tap a day to see its shifts grouped by type, with your confirmed shifts shown in place. A day with nothing open shows the empty state.
 - Open a shift, then apply or instant-book it. Instant-book shifts turn green on the calendar right away. Open a confirmed shift to call out of it.
-- Switch the account banner (setup incomplete, or no shifts in your licensed state) from the panel beside the phone.
+- Reset the demo from the panel beside the phone to start over with the original bookings.
 
 The demo nurse works a full-time job and is usually free on Thursdays and Saturdays, so that's where their booked shifts land.
 

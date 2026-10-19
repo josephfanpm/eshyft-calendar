@@ -1,8 +1,6 @@
-import { ChevronLeft, ChevronRight, CircleCheck, TriangleAlert } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CircleCheck } from 'lucide-react';
 import { addMonths, dayState, monthGrid, monthTitle, SLOTS, startOfMonth, toKey, type Shift } from './data';
 import { SlotIcon } from './icons';
-
-export type Banner = 'none' | 'setup' | 'state';
 
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -11,21 +9,15 @@ interface Props {
   monthOffset: number;
   maxOffset: number;
   shifts: Shift[];
-  banner: Banner;
   onMonth: (offset: number) => void;
   onDay: (key: string) => void;
-  onBanner: () => void;
 }
 
-export function CalendarTab({ today, monthOffset, maxOffset, shifts, banner, onMonth, onDay, onBanner }: Props) {
+export function CalendarTab({ today, monthOffset, maxOffset, shifts, onMonth, onDay }: Props) {
   const month = addMonths(startOfMonth(today), monthOffset);
-  // With the "no shifts in your state" banner, nothing is bookable, so every slot is gray.
-  const visibleShifts = banner === 'state' ? [] : shifts;
 
   return (
     <div className="pb-4">
-      {banner !== 'none' && <BannerCard kind={banner} onClick={onBanner} />}
-
       <div className="flex items-center justify-between px-4 pt-5 pb-3">
         <h2 className="text-[22px] font-bold text-ink-2">{monthTitle(month)}</h2>
         <div className="flex gap-6">
@@ -74,7 +66,7 @@ export function CalendarTab({ today, monthOffset, maxOffset, shifts, banner, onM
           <div key={w} className="grid grid-cols-7 gap-0.5" role="row">
             {week.map((date, i) => {
               if (!date) return <div key={i} />;
-              const state = dayState(date, today, visibleShifts);
+              const state = dayState(date, today, shifts);
               const key = toKey(date);
               if (state.disabled) {
                 return (
@@ -106,28 +98,5 @@ export function CalendarTab({ today, monthOffset, maxOffset, shifts, banner, onM
         ))}
       </div>
     </div>
-  );
-}
-
-function BannerCard({ kind, onClick }: { kind: Exclude<Banner, 'none'>; onClick: () => void }) {
-  const copy =
-    kind === 'setup'
-      ? { title: 'Continue your account setup', body: 'Complete your account to start earning', tone: 'text-urgent' }
-      : {
-          title: 'No shifts in selected state',
-          body: 'If you have a license in another state, please update it and set up your account',
-          tone: 'text-amber-500',
-        };
-  return (
-    <button onClick={onClick} className="mx-4 mt-3 flex w-[calc(100%-2rem)] items-center gap-3 rounded-lg bg-canvas px-4 py-3 text-left">
-      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-white">
-        <TriangleAlert size={18} className={`${copy.tone} fill-current [&>path:nth-child(n+2)]:text-white`} />
-      </span>
-      <span className="flex-1">
-        <span className="block text-[14px] font-medium text-ink">{copy.title}</span>
-        <span className="block text-[12px] leading-snug text-ink-2">{copy.body}</span>
-      </span>
-      <ChevronRight size={20} className="text-ink-2" />
-    </button>
   );
 }
