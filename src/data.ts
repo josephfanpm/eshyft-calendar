@@ -1,5 +1,5 @@
 /**
- * Shift data and calendar logic. All facilities, towns-to-facility pairings,
+ * Shift data and calendar logic. All facilities, towns, pairings,
  * rates and schedules here are made up for this demo.
  */
 
@@ -35,12 +35,12 @@ export const SLOT_INFO: Record<Slot, { label: string; time: string; paidHours: n
 export const MONTHS_VISIBLE = 5;
 
 const FACILITIES = [
-  { name: 'Blue Door Nursing Home', town: 'Ephrata, PA', miles: 2.1 },
-  { name: 'Yellow Door Nursing Home', town: 'Ephrata, PA', miles: 2.4 },
-  { name: 'Maple Ridge Care Center', town: 'Lititz, PA', miles: 6.8 },
-  { name: 'Willow Creek Rehabilitation and Nursing', town: 'Lancaster, PA', miles: 11.3 },
-  { name: 'Cedar Hill Senior Living', town: 'Akron, PA', miles: 4.5 },
-  { name: 'Stonebrook Health and Rehab', town: 'Denver, PA', miles: 8.9 },
+  { name: 'Ostley Glen Nursing Home', town: 'Fenwold, PA', miles: 2.1 },
+  { name: 'Brindlewick Nursing Home', town: 'Fenwold, PA', miles: 2.4 },
+  { name: 'Marrowfield Care Center', town: 'Quillan, PA', miles: 6.8 },
+  { name: 'Quillan Ridge Rehabilitation and Nursing', town: 'Marrowfield, PA', miles: 11.3 },
+  { name: 'Ashcombe Hollow Senior Living', town: 'Brindlewick, PA', miles: 4.5 },
+  { name: 'Fenwold Health and Rehab', town: 'Ostley, PA', miles: 8.9 },
 ];
 
 const RATE_RANGE: Record<Role, [number, number]> = {
