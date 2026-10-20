@@ -10,7 +10,7 @@ function shift(overrides: Partial<Shift>): Shift {
     slot: 'day',
     role: 'CNA',
     facility: 'Test',
-    town: 'Ephrata, PA',
+    town: 'Fenwold, PA',
     miles: 1,
     rate: 25,
     instantBook: false,
