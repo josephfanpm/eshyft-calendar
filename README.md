@@ -2,7 +2,7 @@
 
 A calendar view that lets busy nurses see what's open on the days they're free. I shipped it as the product manager at ESHYFT, a nurse staffing marketplace. This repo is my interactive web recreation of it, plus the [case study](docs/CASE_STUDY.md).
 
-**[Try the live prototype](https://josephfanpm.github.io/eshyft-calendar/)** · [Case study](docs/CASE_STUDY.md) · [Requirements](docs/PRD.md)
+**[Try the live prototype](https://josephfanpm.github.io/Eshyft-calendar/)** · [Case study](docs/CASE_STUDY.md) · [Requirements](docs/PRD.md)
 
 ![The prototype on desktop](docs/screenshots/desktop.png)
 
